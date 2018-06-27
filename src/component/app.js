@@ -1,31 +1,38 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 
-export default class App extends React.Component  {
- 
-
+class App extends React.Component {
+  onSubmit(values) {
+    console.log(values);
+  }
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
         <h2>Report a problem with your delivery</h2>
-        <label>Tracking Number</label>
-        <input type='text' />
-        <label>What is your issue</label>
-        <select>
+        <label htmlFor="trackingNumber">Tracking Number</label>
+        <Field
+          name="trackingNumber"
+          id="trackingNumber"
+          type="text"
+          component="input"
+        />
+        <label htmlFor="issue">What is your issue</label>
+        <Field name="issue" id="issue" component="select">
           <option>My delivery hasn't arrived</option>
-          <option>The wrong item was dilivered</option>
+          <option>The wrong item was delivered</option>
           <option>Part of my order was missing</option>
           <option>Some of my order arrived damaged</option>
           <option>Other (give some details below)</option>
-        </select>
-        <label>Give more details (optional)</label>
-        <textarea></textarea>
+        </Field>
+        <label htmlFor="details">Give more details (optional)</label>
+        <Field name="details" id="details" component="textarea" />
         <button>Submit</button>
       </form>
-    )
+    );
   }
 }
 
-
-
+export default reduxForm({
+  form: 'input'
+})(App);
