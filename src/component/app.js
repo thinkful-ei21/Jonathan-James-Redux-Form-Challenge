@@ -20,7 +20,7 @@ class App extends React.Component {
       })
       .catch(() => {
         return Promise.reject(
-          new SubmissionError({ _error: 'Error submitting form' })
+          new SubmissionError({ _error: 'Error submitting form...' })
         );
       });
   }
@@ -30,7 +30,7 @@ class App extends React.Component {
     if (this.props.submitSucceeded) {
       successMessage = (
         <div className="message message-success">
-          Message submitted successfully
+          Message submitted successfully!
         </div>
       );
     }
